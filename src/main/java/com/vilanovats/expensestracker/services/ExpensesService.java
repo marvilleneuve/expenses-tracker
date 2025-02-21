@@ -1,13 +1,13 @@
 package com.vilanovats.expensestracker.services;
 
 import com.vilanovats.expensestracker.entities.Expenses;
-import org.springframework.data.jpa.repository.Query;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 public interface ExpensesService {
-    public void addExpense(Expenses expenses);
-    public List<Expenses> getAllexpenses();
-    public List<Expenses> getAllByMonth(String date);
+    void addExpense(Expenses expenses);
+    List<Expenses> getAllexpenses();
+    Expenses getExpenseById(UUID id);
+    List<Expenses> getAllByMonth(String date);
 }

@@ -8,12 +8,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/expenses")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ExpenseController {
 
     ExpensesService expensesService;
@@ -35,15 +35,14 @@ public class ExpenseController {
 
     @GetMapping("/allByMonth/{date}")
     public ResponseEntity<Object> getAllExpensesByMonth(@PathVariable String date) {
-
-
         List<Expenses> allExpensesList = expensesService.getAllByMonth(date);
         return ExpensesServiceResponse.generateResponse("Request completed", HttpStatus.OK, allExpensesList);
     }
 
     @GetMapping("/expenseId/{expenseId}")
-    public String getExpenseById(@PathVariable("expenseId") String expenseId) {
-        return "Expense " + expenseId;
+    public ResponseEntity<Object> getExpenseById(@PathVariable("expenseId") UUID expenseId) {
+        Expenses expense = expensesService.getExpenseById(expenseId);
+        return ExpensesServiceResponse.generateResponse("Request completed", HttpStatus.OK, expense);
     }
 
     @GetMapping("/userId/{userId}")

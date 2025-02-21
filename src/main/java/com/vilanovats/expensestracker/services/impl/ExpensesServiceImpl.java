@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class ExpensesServiceImpl implements ExpensesService {
@@ -24,6 +25,11 @@ public class ExpensesServiceImpl implements ExpensesService {
 
     public List<Expenses> getAllexpenses() {
         return expensesRepo.findAll();
+    }
+
+    @Override
+    public Expenses getExpenseById(UUID id) {
+        return expensesRepo.findById(id);
     }
 
     @Override
